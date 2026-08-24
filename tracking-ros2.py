@@ -27,15 +27,13 @@ class CameraTrackingNode(Node):
             
             cv2.imshow("WSL ROS Topic Viewer", frame)
             cv2.waitKey(1)
-
-
-            pose_msg = Pose2D()
-            pose_msg.x = float(xcor)
-            pose_msg.y = float(ycor)
-
+            
         except Exception as e:
             self.get_logger().error(f"Ошибка обработки кадра: {str(e)}")
 
+        pose_msg = Pose2D()
+        pose_msg.x = float(xcor)
+        pose_msg.y = float(ycor)
         pose_msg.theta = 1.0 if self.is_catched is True else 0.0
         self.data_pub.publish(pose_msg)
         self.is_catched = False
