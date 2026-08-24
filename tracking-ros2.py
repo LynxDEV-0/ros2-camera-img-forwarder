@@ -32,12 +32,11 @@ class CameraTrackingNode(Node):
             pose_msg = Pose2D()
             pose_msg.x = float(xcor)
             pose_msg.y = float(ycor)
-            pose_msg.theta = 1.0 if self.is_catched is True else 0.0
-
 
         except Exception as e:
             self.get_logger().error(f"Ошибка обработки кадра: {str(e)}")
 
+        pose_msg.theta = 1.0 if self.is_catched is True else 0.0
         self.data_pub.publish(pose_msg)
         self.is_catched = False
 
